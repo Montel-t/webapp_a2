@@ -10,7 +10,7 @@ nav {
       ul li {
         list-style: none;
         margin: 0 auto;
-        border-left: 2px solid rgb(188, 50, 0);
+        border-left: 2px solid rgb#f3f0e2;
         display: inline-block;
         padding: 0 30px;
         position: relative;
@@ -39,7 +39,7 @@ nav {
         padding-left: 0;
         left: 0;
         display: none;
-        background: rgb(57, 4, 4);
+        background: #22283a;
       }
   
       ul li:hover > ul,
@@ -50,7 +50,7 @@ nav {
         min-width: 250px;
         text-align: left;
         padding-top: 20px;
-        box-shadow: 0px 3px 5px -1px #ff0000;
+        box-shadow: 0px 3px 5px -1px #ec0303;
       }
   
       ul li ul li {
@@ -63,7 +63,7 @@ nav {
   
       ul li ul li a:hover {
         padding-left: 10px;
-        border-left: 2px solid rgb(188, 50, 0);
+        border-left: 2px solid rgb(55, 34, 26);
         transition: all 0.3s ease;
       }
     }
@@ -83,7 +83,11 @@ nav {
 
 .menu{
     padding: auto;
-    background-color: rgb(93, 25, 0);
+    background-color: #2e364f;
+}
+.dropdown{
+  width: 400px;
+  height: 200px;
 }
   
   
