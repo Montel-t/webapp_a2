@@ -21,7 +21,7 @@
     $insert_qry = "INSERT INTO users(fullname, email, genderId, password, address)VALUES('$fname', '$email', '$gender', '$hash_pass', '$Add')";
 
     if($dbConn->query($insert_qry) === TRUE){
-        header("Location: ../ViewUsers.php");
+        header("Location: ../signin.php");
     }else{
         print "Process Failed" . $insert_qry . "<br>" . $dbConn->error;
     }

@@ -89,12 +89,55 @@ body {
     z-index: 1000;
 }
 
+.content {
+        max-width: 1200px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .product-info {
+        padding: 10px;
+        background: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+        color: #333;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .product-description {
+        font-size: 16px;
+        color: #666;
+        margin: 10px 0;
+    }
+
+    .product-price {
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Enhancements for the product display grid */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 300px)); /* Adjusted for better spacing */
+        gap: 30px; /* Increased gap for a better look */
+        justify-content: center; /* Centers grid items when they don't fill the entire row */
+    }
+
+    @media (max-width: 768px) {
+        .grid-container {
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+    }
 
 </style>
 <?php include("templates/header.php"); ?>
 <?php include("templates/circle.php"); ?>
 <?php
-session_start();
+// session_start();
 require_once "includes/dbConnect.php";
 
 // Fetch products from the database
@@ -108,37 +151,36 @@ $result = $dbConn->query($query);
 <div class="row">
     <div class="content">
         <h3>Our Luxury Watches</h3>
-
-        <!-- Products Display -->
         <div class="products-display grid-container">
-    <?php if ($result->num_rows > 0): ?>
-        <?php while($product = $result->fetch_assoc()): ?>
-            <div class="product grid-item">
-                <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="product-image">
-                <h4><?php echo htmlspecialchars($product['name']); ?></h4>
-                <p><?php echo htmlspecialchars($product['description']); ?></p>
-                <p>Price: $<?php echo number_format($product['price'], 2); ?></p>
-                <!-- <form action="addToCart.php" method="post" class="add-to-cart-form">
-                    <input type="hidden" name="productId" value="<?php echo $product['product_id']; ?>">
-                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
-                    <button type="submit" name="addToCart" class="add-to-cart-button">Add to Cart</button>
-                </form> -->
-            </div>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <p>No products found.</p>
-    <?php endif; ?>
-</div>
+            <?php
+            // session_start();
+            require_once "includes/dbConnect.php";
 
-        <h4>Description</h4>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+            $query = "SELECT * FROM products WHERE stock > 0";
+            $result = $dbConn->query($query);
+
+            if ($result->num_rows > 0) {
+                while ($product = $result->fetch_assoc()) {
+                    echo "<div class='product grid-item'>";
+                    echo "<div class='product-info'>";
+                    echo "<img src='" . htmlspecialchars($product['image_url']) . "' alt='" . htmlspecialchars($product['name']) . "' class='product-image'>";
+                    echo "<h4>" . htmlspecialchars($product['name']) . "</h4>";
+                    echo "<p class='product-description'>" . htmlspecialchars($product['description']) . "</p>";
+                    echo "<p class='product-price'>Price: $" . number_format($product['price'], 2) . "</p>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+            } else {
+                echo "<p>No products found.</p>";
+            }
+            ?>
+        </div>
     </div>
     <div class="side_bar">
-        <a href ="signin.php">
+        <a href="signin.php">
             <h3>Sign In</h3>
         </a>
-        
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <p>Become a part of our exclusive community and enjoy the benefits.</p>
     </div>
 </div>
 <?php include("templates/footer.php"); ?>

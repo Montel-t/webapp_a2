@@ -8,97 +8,117 @@ if(!isset($_SESSION["user_info"]) || !is_array($_SESSION["user_info"]) || $_SESS
     exit();
 }?>
 <style>
-    .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Creates a responsive grid */
-    gap: 20px; /* Space between items */
-    padding: 20px; /* Padding around the grid */
-}
-
-.grid-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
-    border: 1px solid #CCC;
-    border-radius: 5px;
-    padding: 15px;
-    background-color: #f9f9f9; /* Light background for each product */
-}
-
-.product-image {
-    width: 100%; /* Make image fill the container */
-    height: auto;
-    max-height: 200px; /* Limit image height */
-    object-fit: contain; /* Ensure aspect ratio is maintained */
-    margin-bottom: 15px; /* Space below the image */
-}
-
-.add-to-cart-form {
-    margin-top: auto; /* Pushes the form to the bottom of the flex container */
-}
-
-.quantity-input {
-    width: 60px;
-    margin-right: 10px;
-}
-
-.add-to-cart-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-.add-to-cart-button:hover {
-    background-color: #45a049;
-}
-
-.product-image:hover {
-    transform: scale(1.05);
-    transition: transform 0.5s ease;
-}
-
-.grid-item {
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.grid-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
-}
-
-.grid-item {
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.grid-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
-}
-
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
-
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-@media (max-width: 768px) {
-    .side_bar {
-        display: none;
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
     }
-}
 
-.header {
-    position: sticky;
-    top: 0;
-    background-color: #FFF;
-    z-index: 1000;
-}
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        padding: 40px;
+        justify-content: center;
+    }
 
+    .grid-item {
+        background-color: #fff;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Ensure content is spaced evenly */
+    }
 
+    .product-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Adjusted for better image display */
+    }
+
+    .add-to-cart-form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px; /* Ensure space between quantity input and button */
+        padding: 20px;
+    }
+
+    .quantity-input, .add-to-cart-button {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+    .quantity-input {
+        border: 1px solid #ccc;
+        width: auto; /* Adjusted for better fit */
+    }
+
+    .add-to-cart-button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-to-cart-button:hover {
+        background-color: #0056b3;
+    }
+
+    .product-image:hover {
+        transform: scale(1.02); /* Subtle zoom effect on hover */
+        transition: transform 0.3s ease;
+    }
+
+    h3, h4, p {
+        margin: 10px 0; /* Uniform margin for text elements */
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .grid-container {
+            padding: 20px;
+        }
+
+        .add-to-cart-form {
+            flex-direction: column; /* Stack input and button on smaller screens */
+        }
+    }
+
+    /* Sticky header with improved styling */
+    .header {
+        background-color: #FFF;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        z-index: 1000;
+        position: sticky;
+        top: 0;
+        padding: 15px 0;
+        margin-bottom: 20px; /* Added margin for separation from content */
+        text-align: center;
+    }
+    
+    /* Style adjustments for side bar links */
+    .side_bar a {
+        display: inline-block;
+        background-color: #007BFF;
+        color: #ffffff;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+    
+    .side_bar a:hover {
+        background-color: #0056b3;
+    }
 </style>
 <?php include("templates/header.php"); ?>
 <?php include("templates/circle.php"); ?>
@@ -150,7 +170,7 @@ $result = $dbConn->query($query);
             <h3>logout</h3>
         </a>
         
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <p></p>
     </div>
 </div>
 <?php include("templates/footer.php"); ?>
