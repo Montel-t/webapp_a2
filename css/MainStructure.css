@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(222, 222, 223);
+    background-color:#E5E4E2;
     margin: 0;
 }
 *{
@@ -57,7 +57,7 @@ p{
 .side_bar{
     padding: 15px;
     float: left;
-    background-color: rgba(28, 15, 162, 0.5);
+    background-color: rgba(222, 222, 223, 0.7);
     width:30%;
     border-top-left-radius: 20%;
     border-top-right-radius: 20%;
@@ -65,7 +65,7 @@ p{
 .side_bar2{
     padding: 15px;
     float: left;
-    background-color: rgba(28, 15, 162, 0.5);
+    background-color: rgba(222, 222, 223, 0.7);
     width:30%;
     border-bottom-left-radius: 20%;
     border-bottom-right-radius: 20%;

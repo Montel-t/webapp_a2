@@ -1,3 +1,14 @@
+<?php
+session_start(); // Start the session at the very top of the script
+?>
+<?php 
+require_once "includes/dbConnect.php";
+if(!isset($_SESSION["user_info"]) || !is_array($_SESSION["user_info"]) || $_SESSION["user_info"]["module"] != 0){
+    header("Location: ./signin.php?not_set");
+    exit();
+}
+
+?>
 <?php include("templates/header.php"); ?>
 <body>
 <?php include("templates/nav.php"); ?>
@@ -17,7 +28,7 @@
     <th>Actions</th>
 </tr>
 <?php
-require_once "includes/dbConnect.php";
+
 
 $select_users = "SELECT * FROM `users` LEFT JOIN `genders` USING (`genderId`) ORDER by `fullname` ASC";
 

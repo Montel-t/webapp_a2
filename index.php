@@ -75,7 +75,9 @@
         </div>
 
         <div class="side_bar">
+        <a href="signin.php">
           <h3>Sign In</h3>
+</a>
           <p>Sign in to your WatchStore account to track your orders, manage your wishlist, and stay updated on the latest arrivals and exclusive offers.</p>
         </div>
       </div>

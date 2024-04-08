@@ -1,6 +1,6 @@
 <?php include("templates/header.php"); ?>
 <body>
-<?php include("templates/nav.php"); ?>
+<?php include("templates/circle.php"); ?>
 <div class="header">
     <h1>Women's Watches</h1>
 </div>
@@ -28,7 +28,9 @@
         <p>Explore our diverse range of women's watches, each crafted with precision to enhance your style. Elevate your presence with these timeless pieces.</p>
     </div>
     <div class="side_bar">
-        <h3>Sign In</h3>
+    <a href="signin.php">
+          <h3>Sign In</h3>
+</a>
         <p>Create an account to enjoy personalized recommendations, early access to new arrivals, and exclusive promotions designed just for you.</p>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <?php include("templates/header.php"); ?>
 <body>
-<?php include("templates/nav.php"); ?>
+<?php include("templates/circle.php"); ?>
 <div class="header">
     <h1>Men's Watches</h1>
 </div>
@@ -28,7 +28,9 @@
         <p>Discover the perfect companion for every occasion. Our men's watches are crafted with precision and attention to detail, ensuring you make a lasting impression wherever you go.</p>
     </div>
     <div class="side_bar">
-        <h3>Sign In</h3>
+    <a href="signin.php">
+          <h3>Sign In</h3>
+</a>
         <p>Sign in to your account to view order history, track shipments, and explore exclusive offers tailored for our valued customers.</p>
     </div>
 </div>
