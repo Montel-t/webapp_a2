@@ -1,5 +1,14 @@
 <?php
-session_start();
+session_start(); // Start the session at the very top of the script
+?>
+<?php 
+require_once "includes/dbConnect.php";
+if(!isset($_SESSION["user_info"]) || !is_array($_SESSION["user_info"]) || $_SESSION["user_info"]["module"] != 1){
+    header("Location: ./signin.php?not_set");
+    exit();
+}?>
+<?php
+// session_start();
 require_once "includes/dbConnect.php"; 
 
 // Handle POST requests for cart updates
@@ -42,7 +51,16 @@ if (!isset($_SESSION['cart']) || count($_SESSION['cart']) == 0) {
     echo "<p>Total Price: $" . number_format($totalPrice, 2) . "</p>";
     echo "<button type='submit' name='updateCart'>Update Cart</button>";
     echo "</form>";
-    echo "<a href='checkout.php'>Proceed to Checkout</a>";
+
+    // Shipping address form
+    echo "<h3>Shipping Address</h3>";
+    echo "<form action='checkout.php' method='post'>";
+    echo "<label for='shippingAddress'>Enter your shipping address:</label><br/>";
+    echo "<textarea id='shippingAddress' name='shipping_address' rows='4' cols='50' required></textarea><br/>";
+    echo "<input type='submit' value='Proceed to Checkout'>";
+    echo "</form>";
 }
 
 ?>
+<br>
+<a href='Users.php'>Return to Products</a>

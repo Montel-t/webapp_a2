@@ -1,3 +1,12 @@
+<?php
+session_start(); // Start the session at the very top of the script
+?>
+<?php 
+require_once "includes/dbConnect.php";
+if(!isset($_SESSION["user_info"]) || !is_array($_SESSION["user_info"]) || $_SESSION["user_info"]["module"] != 1){
+    header("Location: ./signin.php?not_set");
+    exit();
+}?>
 <style>
     .grid-container {
     display: grid;
@@ -94,7 +103,7 @@ body {
 <?php include("templates/header.php"); ?>
 <?php include("templates/circle.php"); ?>
 <?php
-session_start();
+// session_start();
 require_once "includes/dbConnect.php";
 
 // Fetch products from the database
@@ -102,9 +111,9 @@ $query = "SELECT * FROM products WHERE stock > 0"; // Adjust this query as neede
 $result = $dbConn->query($query);
 ?>
 <body>
-<div class="header">
-    <h1>Header</h1>
-</div>
+<!-- <div class="header">
+    <h1>WELCOME TO WATCHSTORE</h1>
+</div> -->
 <div class="row">
     <div class="content">
         <h3>Our Luxury Watches</h3>
@@ -131,10 +140,15 @@ $result = $dbConn->query($query);
 </div>
 
         <h4>Description</h4>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <p></p>
     </div>
     <div class="side_bar">
-        <h3>Sign In</h3>
+        <a href= "viewCart.php">
+            <h3>CART</h3>
+        </a>
+        <a href= "logout.php">
+            <h3>logout</h3>
+        </a>
         
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
     </div>

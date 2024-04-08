@@ -1,6 +1,6 @@
 <?php
 require_once "../includes/dbConnect.php";
-session_start(); // Make sure to start the session at the beginning
+session_start(); 
 
 $entered_email = mysqli_real_escape_string($dbConn, strtolower($_POST["email_address"]));
 $entered_password = mysqli_real_escape_string($dbConn, $_POST["password"]);
@@ -15,10 +15,13 @@ if($spot_email_res->num_rows > 0){
 
     if(password_verify($entered_password, $stored_password)){
         if($user["is_verified"] == 1){
-            // Assign relevant user information to session
+            // Correctly assign the user ID to the session for checkout.php to use
+            $_SESSION['user_id'] = $user['userId']; // Ensure you have a 'userId' column in your 'users' table
+
+            // Assign additional relevant user information to session
             $_SESSION["user_info"] = [
                 "email" => $user["email"],
-                "module" => $user["module"], // Store the user's module in the session
+                "module" => $user["module"], // Continue to store additional info as needed
             ];
 
             // Check the user's module and redirect accordingly

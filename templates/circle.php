@@ -5,10 +5,13 @@
     <ul>
       <li><a href="index.php">Home</a></li>
       <li><a href="products.php">Products</a>
-        <ul class="dropdown">
-          <li><a href="mens.php">Men's Watches</a></li>
-          <li><a href="womens.php">Women's Watches</a></li>
-        </ul>
+        <!-- <ul class="dropdown">
+          <li><a href="mens.php">Smart Luxury Watches</a></li>
+          <li><a href="womens.php">Pilot Watches</a></li>
+          <li><a href="womens.php">Diving Watches</a></li>
+          <li><a href="womens.php">Sports Watches</a></li>
+          <li><a href="womens.php">Dress Watches</a></li>
+        </ul> -->
       </li>
       <li><a href="aboutus.php">About Us</a></li>
       <li><a href="contact.php">Contact</a></li>
