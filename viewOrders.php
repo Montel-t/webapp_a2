@@ -96,13 +96,30 @@ session_start();
 require_once "includes/dbConnect.php";
 
 if (!isset($_SESSION['user_id'])) {
-    // Redirect to sign-in page if not logged in
     $_SESSION['error'] = 'You must be logged in to view your orders.';
     header("Location: signin.php");
     exit();
 }
 
 $userId = $_SESSION['user_id'];
+
+// Handle the status update form submission
+if (isset($_POST['updateStatus']) && isset($_POST['orderId'])) {
+    $orderId = $_POST['orderId'];
+    $updateQuery = "UPDATE orders SET status = 'Complete' WHERE order_id = ? AND customer_id = ?";
+    $stmt = $dbConn->prepare($updateQuery);
+    $stmt->bind_param("ii", $orderId, $userId);
+    if ($stmt->execute()) {
+        echo "<script>alert('Order status updated successfully.');</script>";
+    } else {
+        echo "<script>alert('Error updating order status.');</script>";
+    }
+    $stmt->close();
+    // Refresh the page to show the updated status
+    echo "<meta http-equiv='refresh' content='0'>";
+}
+
+// Rest of your script continues...
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -139,7 +156,16 @@ $userId = $_SESSION['user_id'];
                     echo "<h4>" . htmlspecialchars($row['name']) . "</h4>";
                     echo "<p>Quantity: " . htmlspecialchars($row['quantity']) . "</p>";
                     echo "<p>Price: $" . number_format($row['price'], 2) . "</p>";
-                    echo "<p>Status: " . htmlspecialchars($row['status']) . "</p>";
+                     // Display current status
+                     echo "<p>Status: " . htmlspecialchars($row['status']) . "</p>";
+
+                     // Show a button to mark the order as complete if it's not already
+                     if ($row['status'] !== 'Complete') {
+                         echo "<form method='POST'>";
+                         echo "<input type='hidden' name='orderId' value='{$row['order_id']}'>";
+                         echo "<button type='submit' name='updateStatus' class='add-to-cart-button'>Mark as Complete</button>";
+                         echo "</form>";
+                     }
                     echo "</div>";
                 }
             } else {
